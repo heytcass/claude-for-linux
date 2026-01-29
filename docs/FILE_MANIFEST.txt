@@ -1,0 +1,189 @@
+COWORK FOR LINUX - FILE MANIFEST
+Generated: 2026-01-29
+Implementation: Ralph Loop Iteration 1
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IMPLEMENTATION FILES (3)
+Location: /tmp/
+
+1. claude-cowork-linux.js (8.9K)
+   Purpose: Core session manager and bubblewrap wrapper
+   Contains: CoworkSessionManager, VMCompatibilityAdapter classes
+   Use: Gets installed into app.asar by patcher
+
+2. patch-cowork-linux-v2.js (5.3K)
+   Purpose: Integration patcher script
+   Contains: Patching logic for index.js
+   Use: Run to apply Cowork patches to Claude Desktop
+
+3. install-cowork-linux.sh (4.7K)
+   Purpose: Automated installer
+   Contains: Complete installation workflow
+   Use: Run to install Cowork (chmod +x first)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCUMENTATION FILES (8)
+Location: /tmp/
+
+1. START_HERE.md (5.2K)
+   ★ READ THIS FIRST! ★
+   Purpose: Quick start guide
+   Audience: Everyone
+   Contents: What to do, how to install, quick reference
+
+2. COWORK_README.md (8.6K)
+   Purpose: User guide
+   Audience: Users wanting to use Cowork
+   Contents: Features, usage, troubleshooting
+
+3. COWORK_SUMMARY.md (12K)
+   Purpose: Complete technical overview
+   Audience: Developers, technical users
+   Contents: Architecture, implementation details, security
+
+4. COWORK_INSTALLATION.md (7.5K)
+   Purpose: Detailed installation guide
+   Audience: Users encountering issues
+   Contents: Step-by-step install, troubleshooting, integration
+
+5. COWORK_INDEX.md (9.2K)
+   Purpose: File navigation guide
+   Audience: Anyone looking for specific info
+   Contents: File descriptions, reading order, quick reference
+
+6. cowork-research.md (4.4K)
+   Purpose: Research and design decisions
+   Audience: Developers wanting to understand "why"
+   Contents: macOS analysis, Linux options, design rationale
+
+7. cowork-validation-checklist.md (5.1K)
+   Purpose: Testing and validation checklist
+   Audience: Testers, QA
+   Contents: 6 levels of validation, sign-off procedures
+
+8. RALPH_ITERATION_1_COMPLETE.md (11K)
+   Purpose: Implementation summary
+   Audience: Developers, project managers
+   Contents: What was built, metrics, achievements
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LEGACY/BACKUP FILES (1)
+Location: /tmp/
+
+1. patch-cowork-linux.js (5.6K)
+   Purpose: V1 patcher (superseded by v2)
+   Status: Kept for reference, use v2 instead
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TOTAL FILES: 12
+TOTAL SIZE: ~77KB
+DOCUMENTATION: ~14,000 words
+CODE: ~350 lines
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUICK REFERENCE BY USE CASE
+
+"I just want to install Cowork"
+→ Read: START_HERE.md
+→ Run: install-cowork-linux.sh
+
+"I want to understand what Cowork does"
+→ Read: COWORK_README.md
+
+"I need detailed installation help"
+→ Read: COWORK_INSTALLATION.md
+
+"I want to understand the implementation"
+→ Read: COWORK_SUMMARY.md
+→ Study: claude-cowork-linux.js
+
+"I want to know why design decisions were made"
+→ Read: cowork-research.md
+
+"I need to test/validate the installation"
+→ Use: cowork-validation-checklist.md
+
+"I can't find the file I need"
+→ Read: COWORK_INDEX.md
+
+"I want to see what was accomplished"
+→ Read: RALPH_ITERATION_1_COMPLETE.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FILE DEPENDENCIES
+
+install-cowork-linux.sh
+  ├── Requires: claude-cowork-linux.js
+  ├── Requires: patch-cowork-linux-v2.js
+  └── Creates: Backups, installs to /opt/claude-desktop/
+
+patch-cowork-linux-v2.js
+  └── Installs: claude-cowork-linux.js into app.asar
+
+COWORK_README.md
+  ├── References: COWORK_INSTALLATION.md
+  └── References: COWORK_SUMMARY.md
+
+COWORK_INDEX.md
+  └── Indexes: All files
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+READING ORDER
+
+Beginner Path:
+  1. START_HERE.md (quick overview)
+  2. COWORK_README.md (user guide)
+  3. Run install-cowork-linux.sh
+  4. Test with Claude Desktop
+
+Developer Path:
+  1. cowork-research.md (why)
+  2. COWORK_SUMMARY.md (how)
+  3. claude-cowork-linux.js (code)
+  4. patch-cowork-linux-v2.js (integration)
+
+Troubleshooting Path:
+  1. cowork-validation-checklist.md (find what fails)
+  2. COWORK_INSTALLATION.md (fix it)
+  3. COWORK_INDEX.md (find more info)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VERIFICATION
+
+To verify all files are present:
+
+cd /tmp
+ls -lh START_HERE.md \
+       COWORK_*.md \
+       cowork-*.md \
+       RALPH_*.md \
+       claude-cowork-linux.js \
+       patch-cowork-linux-v2.js \
+       install-cowork-linux.sh
+
+Should show 12 files.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BACKUP RECOMMENDATION
+
+Consider backing up to permanent location:
+
+mkdir -p ~/claude-cowork-backup
+cp /tmp/{START_HERE,COWORK_*,cowork-*,RALPH_*}.md ~/claude-cowork-backup/
+cp /tmp/{claude-cowork-linux.js,patch-cowork-linux-v2.js,install-cowork-linux.sh} ~/claude-cowork-backup/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STATUS: ✅ ALL FILES PRESENT AND READY
+DATE: 2026-01-29
+IMPLEMENTATION: Ralph Loop Iteration 1
+

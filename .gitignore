@@ -1,0 +1,38 @@
+# Temporary files
+*.log
+*.tmp
+*.swp
+*~
+
+# Build artifacts
+*.asar
+*.dmg
+*.img
+app-extracted*/
+app-contents*/
+*.unpacked/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Sensitive
+*.env
+credentials.json
+secrets/
+
+# Large files
+electron-linux/
+*.zip
+
+# Working directories
+/tmp/
+scratch/
