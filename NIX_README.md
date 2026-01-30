@@ -367,3 +367,44 @@ Same as the main project (see root LICENSE file).
 - Original Ubuntu install script and patches
 - Bubblewrap sandboxing approach
 - Cowork Linux implementation
+
+---
+
+## Implementation Details
+
+This section provides technical details about the Nix flake implementation.
+
+### Architecture
+
+Multi-level declarative system:
+- **Standalone**: Quick `nix run` usage for testing
+- **NixOS**: System-wide service with activation scripts
+- **Home Manager**: User-level with desktop entries
+- **Dev Shell**: Full development environment with all tools
+
+### Components
+
+1. **flake.nix** - Main flake definition with packages, apps, and modules
+2. **scripts/asar_tool.py** - ASAR archive manipulation tool
+3. **test-nix-flake.sh** - Comprehensive test suite (10 automated tests)
+4. **examples/** - Configuration examples for NixOS and Home Manager
+
+### Benefits
+
+- ✅ **Reproducible builds** - Guaranteed determinism across machines
+- ✅ **Automatic dependency management** - No manual package installations
+- ✅ **Atomic rollbacks** - Built into Nix, easy version switching
+- ✅ **Multi-user isolation** - Per-user profiles without conflicts
+- ✅ **Configuration as code** - Declarative system management
+
+### Test Results
+
+All 10 tests pass:
+- ✅ Flake structure validation
+- ✅ Package builds (asar-tool, patches, module, installer, wrapper)
+- ✅ ASAR pack/extract functionality
+- ✅ Development shell environment
+- ✅ Flake metadata completeness
+
+Run tests: `./test-nix-flake.sh`
+
