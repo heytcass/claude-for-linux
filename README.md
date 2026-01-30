@@ -7,11 +7,12 @@ Native Claude Desktop implementation for Linux (Ubuntu 25.11) extracted from mac
 - ✅ **Working**: Claude Desktop running natively on Linux with Wayland support
 - ✅ **Claude Code**: Enabled and functional (v2.1.20)
 - ✅ **Window Decorations**: GNOME title bar working
-- ⚠️ **Cowork**: Implementation in progress (currently broken - see cowork branch)
+- ✅ **Cowork**: Directory picker working! (stdin communication WIP - see [COWORK_PROGRESS.md](./COWORK_PROGRESS.md))
+- ✅ **Nix Flake**: Declarative installation for NixOS/Home Manager users
 
 ## Quick Start
 
-If you just want to install Claude Desktop for Linux:
+### Option 1: Ubuntu/Debian Install
 
 ```bash
 # Install dependencies
@@ -23,6 +24,18 @@ sudo nala install dmg2img p7zip-full python3 nodejs
 # Launch
 claude-desktop
 ```
+
+### Option 2: Nix Flake (Recommended for NixOS/Home Manager users)
+
+```bash
+# Install with Nix flakes
+nix run github:yourusername/claude-for-linux
+
+# Launch
+nix run github:yourusername/claude-for-linux#run
+```
+
+See [NIX_README.md](./NIX_README.md) for detailed Nix installation options including NixOS and Home Manager integration.
 
 ## Project Structure
 

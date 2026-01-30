@@ -36,3 +36,4 @@ electron-linux/
 # Working directories
 /tmp/
 scratch/
+.claude/
