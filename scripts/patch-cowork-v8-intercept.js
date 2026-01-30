@@ -54,7 +54,7 @@ const replacement = `async function $rt(t,e,r){
         },
         executeCommand: (cmd) => {
           console.log("[Cowork Linux] executeCommand:", cmd);
-          return manager.spawnProcess(sessionId, cmd.command, cmd.args || []);
+          return manager.spawnSandboxed(sessionId, cmd.command, cmd.args || []);
         },
         addMount: (hostPath, guestPath) => {
           console.log("[Cowork Linux] addMount:", hostPath, "->", guestPath);
@@ -64,6 +64,53 @@ const replacement = `async function $rt(t,e,r){
           console.log("[Cowork Linux] Disposing session");
           manager.destroySession(sessionId);
           delete global.__linuxCowork.vmInstance;
+        },
+        addApprovedOauthToken: (token) => {
+          console.log("[Cowork Linux] addApprovedOauthToken called (no-op for Linux)");
+          return Promise.resolve();
+        },
+        spawn: (command, args, options) => {
+          console.log("[Cowork Linux] spawn:", command, args);
+          const procInfo = manager.spawnSandboxed(sessionId, command, args || []);
+          const child = procInfo.child;
+          // Use Proxy to add writeStdin while delegating everything else to child
+          const proxy = new Proxy(child, {
+            get(target, prop) {
+              if (prop === 'writeStdin') {
+                return (data) => {
+                  if (target.stdin) target.stdin.write(data);
+                };
+              }
+              if (prop === 'processId') {
+                return procInfo.id;
+              }
+              return target[prop];
+            }
+          });
+          return proxy;
+        },
+        exec: (command) => {
+          console.log("[Cowork Linux] exec:", command);
+          return manager.spawnSandboxed(sessionId, '/bin/sh', ['-c', command]);
+        },
+        mkdir: (path, options) => {
+          console.log("[Cowork Linux] mkdir:", path);
+          return Promise.resolve();
+        },
+        readFile: (path, encoding) => {
+          console.log("[Cowork Linux] readFile:", path);
+          const fs = require('fs');
+          return Promise.resolve(fs.readFileSync(path, encoding || 'utf8'));
+        },
+        writeFile: (path, data, encoding) => {
+          console.log("[Cowork Linux] writeFile:", path);
+          const fs = require('fs');
+          fs.writeFileSync(path, data, encoding || 'utf8');
+          return Promise.resolve();
+        },
+        rm: (path, options) => {
+          console.log("[Cowork Linux] rm:", path);
+          return Promise.resolve();
         }
       };
 
