@@ -23,10 +23,10 @@ Complete Nix flake implementation for claude-for-linux providing declarative, re
 
 ```bash
 # Install patches
-nix run github:user/claude-for-linux
+nix run github:heytcass/claude-for-linux
 
 # Launch Claude
-nix run github:user/claude-for-linux#run
+nix run github:heytcass/claude-for-linux#run
 
 # NixOS integration
 services.claude-cowork.enable = true;

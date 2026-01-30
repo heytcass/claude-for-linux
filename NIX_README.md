@@ -1,5 +1,9 @@
 # Claude Cowork for Linux - Nix Flake Guide
 
+[![Nix Flake](https://img.shields.io/badge/Nix-Flake-5277C3?logo=nixos&logoColor=white)](https://github.com/heytcass/claude-for-linux)
+[![NixOS](https://img.shields.io/badge/NixOS-Module-blue?logo=nixos&logoColor=white)](./examples/nixos-configuration.nix)
+[![Home Manager](https://img.shields.io/badge/Home%20Manager-Module-green?logo=nixos&logoColor=white)](./examples/home-manager.nix)
+
 This project provides a Nix flake for declarative installation of Claude Desktop with Cowork support on Linux.
 
 ## Quick Start
@@ -21,7 +25,7 @@ experimental-features = nix-command flakes
 
 ```bash
 # Install Cowork patches
-nix run github:yourusername/claude-for-linux
+nix run github:heytcass/claude-for-linux
 
 # Or from local directory
 nix run .
@@ -45,10 +49,10 @@ Use the flake without modifying your system configuration:
 
 ```bash
 # Install patches
-nix run github:yourusername/claude-for-linux
+nix run github:heytcass/claude-for-linux
 
 # Add to your shell profile for easy launching
-nix profile install github:yourusername/claude-for-linux#wrapper
+nix profile install github:heytcass/claude-for-linux#wrapper
 ```
 
 ### Method 2: NixOS System-Wide
@@ -57,7 +61,7 @@ Add to your `/etc/nixos/configuration.nix`:
 
 ```nix
 {
-  inputs.claude-cowork.url = "github:yourusername/claude-for-linux";
+  inputs.claude-cowork.url = "github:heytcass/claude-for-linux";
 
   # In your configuration
   imports = [ claude-cowork.nixosModules.default ];
@@ -80,7 +84,7 @@ Add to your `home.nix`:
 
 ```nix
 {
-  inputs.claude-cowork.url = "github:yourusername/claude-for-linux";
+  inputs.claude-cowork.url = "github:heytcass/claude-for-linux";
 
   # In your home configuration
   imports = [ claude-cowork.homeManagerModules.default ];

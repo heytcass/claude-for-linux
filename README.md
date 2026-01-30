@@ -1,5 +1,11 @@
 # Claude Desktop for Linux
 
+[![Nix Flake](https://img.shields.io/badge/Nix-Flake-5277C3?logo=nixos&logoColor=white)](https://github.com/heytcass/claude-for-linux)
+[![Platform](https://img.shields.io/badge/Platform-Linux-blue?logo=linux&logoColor=white)](https://github.com/heytcass/claude-for-linux)
+[![License](https://img.shields.io/badge/License-Personal%20Use-orange)](./LICENSE)
+[![Claude Desktop](https://img.shields.io/badge/Claude%20Desktop-v1.1.1200-purple)](https://claude.ai)
+[![Cowork](https://img.shields.io/badge/Cowork-Enabled-green)](./COWORK_PROGRESS.md)
+
 Native Claude Desktop implementation for Linux (Ubuntu 25.11) extracted from macOS build.
 
 ## Status
@@ -29,10 +35,10 @@ claude-desktop
 
 ```bash
 # Install with Nix flakes
-nix run github:yourusername/claude-for-linux
+nix run github:heytcass/claude-for-linux
 
 # Launch
-nix run github:yourusername/claude-for-linux#run
+nix run github:heytcass/claude-for-linux#run
 ```
 
 See [NIX_README.md](./NIX_README.md) for detailed Nix installation options including NixOS and Home Manager integration.

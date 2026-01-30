@@ -134,7 +134,7 @@ Auto-update is opt-in:
 
 **Standalone**: Quick `nix run` for testing
 ```bash
-nix run github:user/claude-for-linux
+nix run github:heytcass/claude-for-linux
 ```
 
 **NixOS**: System-wide service
@@ -246,20 +246,20 @@ runtimeInputs = with pkgs; [
 
 ```bash
 # Install patches
-nix run github:user/claude-for-linux
+nix run github:heytcass/claude-for-linux
 
 # Launch Claude
-nix run github:user/claude-for-linux#run
+nix run github:heytcass/claude-for-linux#run
 
 # Launch with auto-update
-nix run github:user/claude-for-linux#run-auto-update
+nix run github:heytcass/claude-for-linux#run-auto-update
 ```
 
 ### NixOS Configuration
 
 ```nix
 {
-  inputs.claude-cowork.url = "github:user/claude-for-linux";
+  inputs.claude-cowork.url = "github:heytcass/claude-for-linux";
 
   services.claude-cowork = {
     enable = true;
@@ -272,7 +272,7 @@ nix run github:user/claude-for-linux#run-auto-update
 
 ```nix
 {
-  inputs.claude-cowork.url = "github:user/claude-for-linux";
+  inputs.claude-cowork.url = "github:heytcass/claude-for-linux";
 
   programs.claude-cowork = {
     enable = true;

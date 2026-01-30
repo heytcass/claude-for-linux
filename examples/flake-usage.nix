@@ -9,7 +9,7 @@
 
     # Add Claude Cowork flake
     claude-cowork = {
-      url = "github:yourusername/claude-for-linux";
+      url = "github:heytcass/claude-for-linux";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
