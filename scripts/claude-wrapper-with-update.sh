@@ -41,11 +41,17 @@ should_check_update() {
 
 # Function to quick-check for updates (fast, non-blocking)
 quick_update_check() {
-    local current_version=$(cat "$VERSION_FILE" 2>/dev/null || echo "1.1.0")
-    local current_build=$(echo "$current_version" | cut -d. -f3)
-    local test_build=$((current_build + 10))  # Check 10 versions ahead
-    local test_version="1.1.$test_build"
-    local base_url="https://storage.googleapis.com/osprey-downloads-c02f6a0d-347c-492b-a752-3e0651722e97/nest-mac-release"
+    local current_version
+    local current_build
+    local test_build
+    local test_version
+    local base_url
+
+    current_version=$(cat "$VERSION_FILE" 2>/dev/null || echo "1.1.0")
+    current_build=$(echo "$current_version" | cut -d. -f3)
+    test_build=$((current_build + 10))  # Check 10 versions ahead
+    test_version="1.1.$test_build"
+    base_url="https://storage.googleapis.com/osprey-downloads-c02f6a0d-347c-492b-a752-3e0651722e97/nest-mac-release"
 
     # Quick HEAD request with 2s timeout
     if timeout 2 curl -sf -I "$base_url/Claude-darwin-universal-${test_version}.dmg" >/dev/null 2>&1; then
