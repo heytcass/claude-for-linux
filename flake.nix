@@ -207,9 +207,10 @@
 
               # --- Patch 08a: Tray icon resource path (regex) ---
               # Returns real filesystem path on Linux (COSMIC SNI can't read from ASAR)
+              # Note: identifiers may contain $ (e.g. T$t), so use [\w$]+ instead of \w+
               echo "[patch:08a] Patching tray icon resource path..."
-              perl -i -pe 's{function (\w+)\(\)\{return (\w+)\.app\.isPackaged\?(\w+)\.resourcesPath:(\w+)\.resolve\(__dirname,"\.\.","\.\.","resources"\)\}}{function $1(){return process.platform==="linux"?$4.join($4.dirname($2.app.getAppPath()),"resources"):$2.app.isPackaged?$3.resourcesPath:$4.resolve(__dirname,"..","..","resources")}}g' "$INDEX"
-              grep -qP 'process\.platform==="linux"\?\w+\.join\(\w+\.dirname\(' "$INDEX" \
+              perl -i -pe 's{function ([\w\$]+)\(\)\{return ([\w\$]+)\.app\.isPackaged\?([\w\$]+)\.resourcesPath:([\w\$]+)\.resolve\(__dirname,"\.\.","\.\.","resources"\)\}}{function $1(){return process.platform==="linux"?$4.join($4.dirname($2.app.getAppPath()),"resources"):$2.app.isPackaged?$3.resourcesPath:$4.resolve(__dirname,"..","..","resources")}}g' "$INDEX"
+              grep -qP 'process\.platform==="linux"\?[\w$]+\.join\([\w$]+\.dirname\(' "$INDEX" \
                 || { echo "ERROR: patch 08a (tray icon path) failed to apply"; exit 1; }
               echo "[patch:08a] Done"
 
@@ -221,11 +222,10 @@
                 || { echo "ERROR: patch 08b (tray icon filename) failed to apply"; exit 1; }
               echo "[patch:08b] Done"
 
-              # --- Patch 09: DBus tray cleanup delay (regex) ---
-              # Prevents StatusNotifierItem registration race on Linux
-              echo "[patch:09] Patching tray DBus cleanup delay..."
-              perl -i -pe 's{(\w+)&&\(\1\.destroy\(\),\1=null\)}{$1&&($1.destroy(),$1=null,await new Promise(r=>setTimeout(r,250)))}g' "$INDEX"
-              echo "[patch:09] Done"
+              # --- Patch 09: DBus tray cleanup delay ---
+              # REMOVED: Original patch used await in a non-async function (always broken).
+              # Tray works correctly without any delay on Electron 37+.
+              echo "[patch:09] Skipped (not needed)"
 
               # Repack ASAR
               echo "[6/6] Repacking ASAR..."
