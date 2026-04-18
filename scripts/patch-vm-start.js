@@ -19,8 +19,8 @@ console.log('=== Dynamic Patch: VM Start Intercept ===\n');
 let content = fs.readFileSync(INDEX_JS_PATH, 'utf8');
 
 // Discover function signature by matching the stable pattern:
-// async function WORD(WORD,WORD,WORD,WORD){var WORD,...;const WORD=WORD(),...WORD=WORD();WORD.info(`[VM:start]
-const sigRegex = /async function (\w+)\((\w+),(\w+),(\w+),(\w+)\)\{(var \w+(?:,\w+)*;const \w+=\w+\(\),\w+=Date\.now\(\),\w+=new \w+,\w+=\w+\(\);\w+\.info\(`\[VM:start\])/;
+// async function WORD(WORD,WORD,WORD,WORD){var WORD,...;const WORD=WORD(),...WORD=WORD();[optional WORD(),]WORD.info(`[VM:start]
+const sigRegex = /async function (\w+)\((\w+),(\w+),(\w+),(\w+)\)\{(var \w+(?:,\w+)*;const \w+=\w+\(\),\w+=Date\.now\(\),\w+=new \w+,\w+=\w+\(\);(?:\w+\(\),)?\w+\.info\(`\[VM:start\])/;
 const sigMatch = content.match(sigRegex);
 
 if (!sigMatch) {
@@ -35,7 +35,8 @@ const originalBody = sigMatch[6];
 console.log(`  Found VM start function: ${funcName}(${params.join(',')})`);
 
 // Discover status dispatch: WORD(WORD.Ready) near lam_vm_startup_completed
-const statusRegex = /(\w+)\((\w+)\.Ready\),\w+\("lam_vm_startup_completed"/;
+// Note: function names may contain $ (e.g. X$), so use [\w$]+ instead of \w+
+const statusRegex = /([\w$]+)\(([\w$]+)\.Ready\),[\w$]+\("lam_vm_startup_completed"/;
 const statusMatch = content.match(statusRegex);
 
 let statusDispatch = 'console.log("[Cowork Linux] Ready")';
