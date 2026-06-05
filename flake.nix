@@ -9,9 +9,9 @@
   outputs = { self, nixpkgs, flake-utils }:
     let
       # Claude Desktop version and source
-      claudeVersion = "1.1.3770";
-      claudeDmgHash = "sha256-dx+lYjSYN1vRMKGQdNYFJwxZAwfyoLjxlJUKd29c6+Y=";
-      claudeDmgUrl = "https://downloads.claude.ai/releases/darwin/universal/${claudeVersion}/Claude-f7f5859a17386e383fad75f35ff6dd0f6e9dfd66.dmg";
+      claudeVersion = "1.11187.2";
+      claudeDmgHash = "sha256-N/EYmVhdOki0afWRS08aeX/P0E/clt8YOR3vkgNQhws=";
+      claudeDmgUrl = "https://downloads.claude.ai/releases/darwin/universal/${claudeVersion}/Claude-8cc3afa7b40409eb06b0c048fad852f0c0df3d12.dmg";
 
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
 
